@@ -120,7 +120,13 @@ function handleGameOver() {
   gameOver.style.justifyContent = "center";
   gameOver.style.alignItems = "center";
   firstChild.textContent = `Your Score: ${currentScore}`;
-  lastChild.textContent = `Highest Score: ${highestScore}`;
+  highestScore = localStorage.getItem("highestScore")
+    ? parseInt(localStorage.getItem("highestScore"))
+    : 0;
+  lastChild.textContent = `Highest Score: ${Math.max(
+    highestScore,
+    currentScore
+  )}`;
   clearTimeout(startGameTimeout);
 }
 
