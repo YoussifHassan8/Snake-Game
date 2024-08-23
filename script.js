@@ -137,7 +137,10 @@ function updateScores() {
   highestScoreDom[0].textContent = `Highest Score: ${newHighestScore}`;
 }
 
+let keyLock = false;
+
 function handleKeydown(event) {
+  if (keyLock) return;
   if (
     event.key === "ArrowUp" &&
     !(direction.x === 0 && direction.y === gridSize)
@@ -158,6 +161,7 @@ function handleKeydown(event) {
     !(direction.x === -gridSize && direction.y === 0)
   )
     direction = { x: gridSize, y: 0 };
+  keyLock = true;
 }
 
 function resetGame() {
@@ -177,6 +181,7 @@ function startGame() {
   }
   updateSnakePosition();
   drawSnake();
+  keyLock = false;
   startGameTimeout = setTimeout(startGame, 50);
 }
 
